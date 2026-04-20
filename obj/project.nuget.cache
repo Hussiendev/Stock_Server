@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "rCnznuuZe038inVCtGDWrJjT/AK+i01qG2MXAUN/nSQgot8AjXkGyn/FzezavP4k1D6dWmvLcYRkOZjdZprw+w==",
+  "dgSpecHash": "5sCqsdJO4SKaUv8B5BdUM12GYGqiw3gVSSoTwqO9aZlaOqD7NhdG5L+Fe5aAOpWxMS8fMtWK5EKf8aInE3KZYg==",
   "success": true,
   "projectFilePath": "C:\\Stock Manager\\Stock_Server\\Stock_Server.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\bcrypt.net-next\\4.1.0\\bcrypt.net-next.4.1.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\dotnetenv\\3.1.1\\dotnetenv.3.1.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.4\\microsoft.aspnetcore.openapi.8.0.4.nupkg.sha512",

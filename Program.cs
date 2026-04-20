@@ -64,11 +64,15 @@ builder.Services.AddDbContext<StockDbContext>(options =>
 
 builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
 builder.Services.AddScoped<IRepository<Supplier>, SupplierRepository>();
-builder.Services.AddScoped<SupplierRepository>();
-builder.Services.AddScoped<ProductService>();
-builder.Services.AddScoped<SupplierService>();
+builder.Services.AddScoped<IRepository<User>, UserRepository>();
+
+
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<JSONProductMapper>();
 builder.Services.AddScoped<JSONSupplierMapper>();
+builder.Services.AddScoped<JSONUserMapper>();
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())

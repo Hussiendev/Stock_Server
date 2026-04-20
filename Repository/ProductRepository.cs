@@ -33,7 +33,7 @@ public class ProductRepository : IRepository<Product>
         }
     }
 
-    public async Task<Product> GetByIdAsync(string id)
+    public async Task<Product?> GetByIdAsync(string id)
     {
         try
         {
@@ -42,14 +42,10 @@ public class ProductRepository : IRepository<Product>
             if (entity == null)
             {
                 _logger.LogWarning("Product with ID {Id} not found", id);
-                throw new ItemNotFoundException($"Product with ID {id} not found");
+                return null;
             }
             _logger.LogInformation("Retrieved product with ID {Id}", id);
             return entity;
-        }
-        catch (ItemNotFoundException)
-        {
-            throw;
         }
         catch (Exception ex)
         {
@@ -58,16 +54,32 @@ public class ProductRepository : IRepository<Product>
         }
     }
 
+    public async Task<Product?> GetByNameAsync(string name)
+    {
+        try
+        {
+            _logger.LogInformation("Retrieving product with name {Name}", name);
+            var entity = await _context.Products.Include(p => p.Supplier).FirstOrDefaultAsync(p => p.Name == name);
+            if (entity == null)
+            {
+                _logger.LogWarning("Product with name {Name} not found", name);
+                return null;
+            }
+            _logger.LogInformation("Retrieved product with name {Name}", name);
+            return entity;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to retrieve product with name {Name}", name);
+            throw new DBException($"Failed to retrieve product with name {name}", ex);
+        }
+    }
+
     public async Task<Product> CreateAsync(Product entity)
     {
         try
         {
             _logger.LogInformation("Creating new product with name {Name}", entity.Name);
-            // Detach any tracked suppliers to avoid conflicts
-            foreach (var entry in _context.ChangeTracker.Entries<Supplier>())
-            {
-                entry.State = EntityState.Detached;
-            }
             _context.Products.Add(entity);
             await _context.SaveChangesAsync();
             _logger.LogInformation("Created product with ID {Id}", entity.Id);
@@ -80,46 +92,7 @@ public class ProductRepository : IRepository<Product>
         }
     }
 
-    public async Task UpdateAsync(Product entity)
-    {
-        try
-        {
-            _logger.LogInformation("Updating product with ID {Id}", entity.Id);
-            _context.Products.Update(entity);
-            await _context.SaveChangesAsync();
-            _logger.LogInformation("Updated product with ID {Id}", entity.Id);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to update product with ID {Id}", entity.Id);
-            throw new DBException($"Failed to update product with ID {entity.Id}", ex);
-        }
-    }
 
-    public async Task<Product> GetByNameAsync(string name)
-    {
-        try
-        {
-            _logger.LogInformation("Retrieving product with name {Name}", name);
-            var entity = await _context.Products.Include(p => p.Supplier).FirstOrDefaultAsync(p => p.Name == name);
-            if (entity == null)
-            {
-                _logger.LogWarning("Product with name {Name} not found", name);
-                throw new ItemNotFoundException($"Product with name {name} not found");
-            }
-            _logger.LogInformation("Retrieved product with name {Name}", name);
-            return entity;
-        }
-        catch (ItemNotFoundException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to retrieve product with name {Name}", name);
-            throw new DBException($"Failed to retrieve product with name {name}", ex);
-        }
-    }
 
     public async Task UpdateByNameAsync(string name, Product entity)
     {
@@ -127,15 +100,14 @@ public class ProductRepository : IRepository<Product>
         {
             _logger.LogInformation("Updating product with name {Name}", name);
             var existingEntity = await GetByNameAsync(name);
-            entity.Id = existingEntity.Id; // Preserve the ID
+            if (existingEntity == null)
+                throw new ItemNotFoundException($"Product with name {name} not found");
+            entity.Id = existingEntity.Id;
             _context.Entry(existingEntity).CurrentValues.SetValues(entity);
             await _context.SaveChangesAsync();
             _logger.LogInformation("Updated product with name {Name}", name);
         }
-        catch (ItemNotFoundException)
-        {
-            throw;
-        }
+        catch (ItemNotFoundException) { throw; }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to update product with name {Name}", name);
@@ -150,22 +122,25 @@ public class ProductRepository : IRepository<Product>
             _logger.LogInformation("Deleting product with ID {Id}", id);
             var entity = await GetByIdAsync(id);
             if (entity == null)
-            {
-                _logger.LogWarning("Product with ID {Id} not found for deletion", id);
                 throw new ItemNotFoundException($"Product with ID {id} not found");
-            }
             _context.Products.Remove(entity);
             await _context.SaveChangesAsync();
             _logger.LogInformation("Deleted product with ID {Id}", id);
         }
-        catch (ItemNotFoundException)
-        {
-            throw;
-        }
+        catch (ItemNotFoundException) { throw; }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to delete product with ID {Id}", id);
             throw new DBException($"Failed to delete product with ID {id}", ex);
         }
     }
+        public async Task<bool> ExistsByNameAsync(string name, string? excludeId = null)
+    {
+        var query = _context.Products.Where(p => p.Name == name);
+        if (!string.IsNullOrEmpty(excludeId))
+            query = query.Where(p => p.Id != excludeId);
+        return await query.AnyAsync();
+    }
+
+   
 }

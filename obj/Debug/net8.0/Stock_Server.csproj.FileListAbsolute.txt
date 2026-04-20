@@ -1,10 +1,3 @@
-C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.csproj.AssemblyReference.cache
-C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.GeneratedMSBuildEditorConfig.editorconfig
-C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.AssemblyInfoInputs.cache
-C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.AssemblyInfo.cs
-C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.csproj.CoreCompileInputs.cache
-C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.MvcApplicationPartsAssemblyInfo.cs
-C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.MvcApplicationPartsAssemblyInfo.cache
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\appsettings.Development.json
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\appsettings.json
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Stock_Server.exe
@@ -12,6 +5,7 @@ C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Stock_Server.deps.json
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Stock_Server.runtimeconfig.json
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Stock_Server.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Stock_Server.pdb
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\DotNetEnv.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Humanizer.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -40,6 +34,7 @@ C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Npgsql.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Sprache.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -119,6 +114,14 @@ C:\Stock Manager\Stock_Server\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspa
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.csproj.AssemblyReference.cache
+C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.GeneratedMSBuildEditorConfig.editorconfig
+C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.AssemblyInfoInputs.cache
+C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.AssemblyInfo.cs
+C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.csproj.CoreCompileInputs.cache
+C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.MvcApplicationPartsAssemblyInfo.cs
+C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.MvcApplicationPartsAssemblyInfo.cache
+C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.sourcelink.json
 C:\Stock Manager\Stock_Server\obj\Debug\net8.0\staticwebassets.build.json
 C:\Stock Manager\Stock_Server\obj\Debug\net8.0\staticwebassets.development.json
 C:\Stock Manager\Stock_Server\obj\Debug\net8.0\staticwebassets\msbuild.Stock_Server.Microsoft.AspNetCore.StaticWebAssets.props
@@ -133,5 +136,4 @@ C:\Stock Manager\Stock_Server\obj\Debug\net8.0\refint\Stock_Server.dll
 C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.pdb
 C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.genruntimeconfig.cache
 C:\Stock Manager\Stock_Server\obj\Debug\net8.0\ref\Stock_Server.dll
-C:\Stock Manager\Stock_Server\bin\Debug\net8.0\DotNetEnv.dll
-C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Sprache.dll
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\BCrypt.Net-Next.dll
