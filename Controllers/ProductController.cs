@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stock_Server.Mapper;
 using Stock_Server.Service;
@@ -7,6 +8,7 @@ namespace Stock_Server.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize] // Require authentication for all endpoints in this controller
 public class ProductController : ControllerBase
 {
     private readonly IProductService _service;

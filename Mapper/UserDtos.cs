@@ -17,7 +17,7 @@ public class LoginResponse
 {
     public string Id { get; set; } = string.Empty;
     public string Username { get; set; } = string.Empty;
-    public Roles Role { get; set; }
+    public string Role { get; set; }=string.Empty;
     public bool IsVerified { get; set; }
     public string AccessToken { get; set; } = string.Empty;
     public string RefreshToken { get; set; } = string.Empty;
@@ -27,7 +27,7 @@ public class UserResponse
 {
     public string Id { get; set; } = string.Empty;
     public string Username { get; set; } = string.Empty;
-    public Roles Role { get; set; }
+    public String  Role { get; set; }=string.Empty;
     public bool IsVerified { get; set; }
     public DateTime LastLogin { get; set; }
     public DateTime RefreshTokenExpiryTime { get; set; }
@@ -37,6 +37,18 @@ public class UserSummaryResponse
 {
     public string Id { get; set; } = string.Empty;
     public string Username { get; set; } = string.Empty;
-    public Roles Role { get; set; }
+    public String Role { get; set; }=string.Empty;
     public bool IsVerified { get; set; }
+};
+public class UserUpdateRequest{
+    public string? Username { get; set; }
+    public string? new_Pass {get;set;} 
+    public Roles? Role { get; set; }      
+
+    };
+    public class RefreshResponse
+{
+    public string AccessToken { get; set; } = string.Empty;
+    public string RefreshToken { get; set; } = string.Empty;
+    public DateTime ExpiresAt { get; set; }   // access token expiry
 }

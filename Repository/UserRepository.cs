@@ -6,7 +6,7 @@ using Stock_Server.Util.Exceptions;
 
 namespace Stock_Server.Repository;
 
-public class UserRepository : IRepository<User>
+public class UserRepository : IUserRepo
 {
     private readonly StockDbContext _context;
     private readonly ILogger<UserRepository> _logger;
@@ -23,6 +23,7 @@ public class UserRepository : IRepository<User>
         {
             _logger.LogInformation("Retrieving all users");
             var entities = await _context.Users.ToListAsync();
+            
             _logger.LogInformation("Retrieved {Count} users", entities.Count);
             return entities;
         }
@@ -144,10 +145,7 @@ public async Task<User?> GetByNameAsync(string name)
         _logger.LogInformation("Retrieved user with username {Username}", name);
         return entity;
     }
-    catch (ItemNotFoundException)
-    {
-        throw;
-    }
+   
     catch (Exception ex)
     {
         _logger.LogError(ex, "Failed to retrieve user with username {Username}", name);
@@ -188,6 +186,49 @@ public async Task UpdateByNameAsync(string name, User entity)
         query = query.Where(u => u.Id != excludeId);
     return await query.AnyAsync();
 }
+public async Task UpdateRefreshTokenAsync(string userId, string? hashedToken, DateTime? expiry)
+{
+    var user = await GetByIdAsync(userId);
+    if (user != null)
+    {
+        user.RefreshToken = hashedToken;
+        user.RefreshTokenExpiryTime = expiry;
+        await _context.SaveChangesAsync();
+    }
+
+}
+public async Task UpdateLoginMetadataAsync(string userId, DateTime lastLogin, bool isVerified)
+{
+    var user = await GetByIdAsync(userId);
+    if (user != null)
+    {
+        user.LastLogin = lastLogin;
+        user.IsVerified = isVerified;
+        await _context.SaveChangesAsync();
+    }
+}
+public async Task UpdateLogoutMetaDataAsync(string Id,string? token,DateTime? expired)
+    {
+        var user=await GetByIdAsync(Id);
+        try{
+        if (user != null)
+        {
+            user.IsVerified=false;
+            user.RefreshToken=token;
+            user.RefreshTokenExpiryTime=expired; 
+            await _context.SaveChangesAsync();
+
+        }
+        }
+        
+        catch(Exception ex)
+        {
+            _logger.LogError(ex, "Failed to update logout metadata for user with ID {Id}", Id);
+            throw new DBException($"Failed to update logout metadata for user with ID {Id}", ex);
+        }
+    }
+
+    
 }
 
     

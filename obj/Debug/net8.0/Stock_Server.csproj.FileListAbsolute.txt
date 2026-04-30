@@ -137,3 +137,11 @@ C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.pdb
 C:\Stock Manager\Stock_Server\obj\Debug\net8.0\Stock_Server.genruntimeconfig.cache
 C:\Stock Manager\Stock_Server\obj\Debug\net8.0\ref\Stock_Server.dll
 C:\Stock Manager\Stock_Server\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Stock Manager\Stock_Server\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll

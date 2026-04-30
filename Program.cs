@@ -6,9 +6,53 @@ using Stock_Server.Service;
 using Stock_Server.Mapper;
 using DotNetEnv;
 
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
+// ---------------------------
+var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET")
+                ?? builder.Configuration["JwtSettings:SecretKey"];
+var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER")
+             ?? builder.Configuration["JwtSettings:Issuer"];
+var audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE")
+               ?? builder.Configuration["JwtSettings:Audience"];
+
+if (string.IsNullOrEmpty(jwtSecret) || jwtSecret.Length < 32)
+    throw new InvalidOperationException("JWT_SECRET must be at least 32 characters");
+
+var key = Encoding.UTF8.GetBytes(jwtSecret);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = !string.IsNullOrEmpty(issuer),
+            ValidIssuer = issuer,
+            ValidateAudience = !string.IsNullOrEmpty(audience),
+            ValidAudience = audience,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero   // optional, strict expiry
+        };
+        
+        // 🔥 CRITICAL: Read token from cookie "auth"
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                context.Token = context.Request.Cookies["auth"];
+                return Task.CompletedTask;
+            }
+        };
+    });
+
+builder.Services.AddAuthorization();
+
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -47,11 +91,11 @@ if (connectionString.StartsWith("postgresql://"))
             var keyValue = param.Split('=');
             if (keyValue.Length == 2)
             {
-                var key = keyValue[0];
+                var key_1 = keyValue[0];
                 var value = keyValue[1];
-                if (key == "sslmode")
+                if (key_1 == "sslmode")
                     connectionString += $"SSL Mode={value};";
-                else if (key == "channel_binding")
+                else if (key_1 == "channel_binding")
                     connectionString += $"Channel Binding={value};";
             }
         }
@@ -64,15 +108,17 @@ builder.Services.AddDbContext<StockDbContext>(options =>
 
 builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
 builder.Services.AddScoped<IRepository<Supplier>, SupplierRepository>();
-builder.Services.AddScoped<IRepository<User>, UserRepository>();
-
+builder.Services.AddScoped<IUserRepo, UserRepository>();
+builder.Services.AddScoped<IRepository<User>, UserRepository>(); 
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<JSONProductMapper>();
 builder.Services.AddScoped<JSONSupplierMapper>();
 builder.Services.AddScoped<JSONUserMapper>();
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -89,7 +135,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+ 
+app.UseAuthentication();   // validates token, sets User
+app.UseAuthorization(); 
 app.MapControllers();
 
 app.Run();
