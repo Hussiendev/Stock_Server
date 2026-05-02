@@ -23,7 +23,7 @@ jobs:
       run:  dotnet restore **/*.csproj
 
     - name: Build
-      run: dotnet build Stock_Server/Stock_Server.csproj --no-restore --configuration Release
+      run: dotnet build  **/*.csproj --no-restore --configuration Release
 
     - name: Run tests
-      run: dotnet test Stock_Server.Tests/Stock_Server.Tests.csproj --no-build --configuration Release
+      run: dotnet test  **/*.csproj --no-build --configuration Release
