@@ -25,6 +25,5 @@ jobs:
     - name: Build
       run: dotnet build Stock_Server/Stock_Server.csproj --no-restore --configuration Release
 
-    - name: Run tests (create a test project first)
-      run: dotnet test Stock_Server/Stock_Server.csproj --no-build --configuration Release --verbosity normal
-      continue-on-error: true  # remove this once you have real tests
+    - name: Run tests
+      run: dotnet test Stock_Server.Tests/Stock_Server.Tests.csproj --no-build --configuration Release
