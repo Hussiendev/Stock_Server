@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Stock Manager\\Stock_Server\\Stock_Server.csproj": {}
+    "C:\\Stock_Manager\\Stock_Server\\Stock_Server.csproj": {}
   },
   "projects": {
-    "C:\\Stock Manager\\Stock_Server\\Stock_Server.csproj": {
+    "C:\\Stock_Manager\\Stock_Server\\Stock_Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Stock Manager\\Stock_Server\\Stock_Server.csproj",
+        "projectUniqueName": "C:\\Stock_Manager\\Stock_Server\\Stock_Server.csproj",
         "projectName": "Stock_Server",
-        "projectPath": "C:\\Stock Manager\\Stock_Server\\Stock_Server.csproj",
+        "projectPath": "C:\\Stock_Manager\\Stock_Server\\Stock_Server.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Stock Manager\\Stock_Server\\obj\\",
+        "outputPath": "C:\\Stock_Manager\\Stock_Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
